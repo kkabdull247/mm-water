@@ -1,0 +1,1161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Moonsoon Minerals — Premium Drinking Water</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+/* ══════════════════════════════════════════════
+   TOKENS
+══════════════════════════════════════════════ */
+:root{
+  --white:    #ffffff;
+  --off:      #faf9f7;
+  --cream:    #f3efe7;
+  --cream2:   #e8e2d6;
+  --gold:     #b8952a;
+  --gold2:    #d4ae40;
+  --gold3:    #f0d878;
+  --gold4:    #fdf6e0;
+  --gold5:    rgba(184,149,42,.12);
+  --navy:     #0c1a2e;
+  --navy2:    #1a2e45;
+  --blue:     #1e4a7a;
+  --text:     #0c1a2e;
+  --t2:       #3a4d62;
+  --t3:       #7a8ea0;
+  --t4:       rgba(12,26,46,.06);
+  --bdr:      rgba(184,149,42,.18);
+  --bdr2:     rgba(12,26,46,.1);
+  --bdr3:     rgba(12,26,46,.06);
+  --shadow:   0 4px 30px rgba(12,26,46,.07);
+  --shadow2:  0 20px 60px rgba(12,26,46,.12);
+  --ggrad:    linear-gradient(135deg,#b8952a 0%,#d4ae40 50%,#b8952a 100%);
+  --serif:    'Fraunces',Georgia,serif;
+  --sans:     'Jost',system-ui,sans-serif;
+  --g:        clamp(18px,5.5vw,90px);
+  --rad:      6px;
+  --rad2:     14px;
+  --rad3:     30px;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--white);color:var(--text);font-family:var(--sans);overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+img{display:block;width:100%;object-fit:cover;}
+button{font-family:var(--sans);cursor:pointer;border:none;outline:none;}
+
+/* ══════════════════════════════════════════════
+   LOADER
+══════════════════════════════════════════════ */
+#loader{
+  position:fixed;inset:0;background:var(--navy);z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
+.ld-drop{
+  width:56px;height:56px;position:relative;
+  animation:drip 1.6s ease-in-out infinite;
+}
+.ld-drop::before{
+  content:'💧';font-size:2.4rem;position:absolute;
+  inset:0;display:flex;align-items:center;justify-content:center;
+}
+@keyframes drip{0%,100%{transform:translateY(0) scale(1);}50%{transform:translateY(8px) scale(.9);}}
+.ld-name{font-family:var(--serif);font-size:clamp(1.4rem,3.5vw,2rem);font-weight:300;color:var(--white);letter-spacing:.08em;}
+.ld-name span{color:var(--gold2);}
+.ld-tagline{font-size:10px;letter-spacing:.28em;color:rgba(255,255,255,.35);text-transform:uppercase;font-weight:500;}
+.ld-bar-wrap{width:160px;height:2px;background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;}
+.ld-bar{height:2px;width:0%;background:var(--ggrad);transition:width .06s linear;}
+.ld-pct{font-size:10px;letter-spacing:.18em;color:rgba(255,255,255,.3);}
+
+/* ══════════════════════════════════════════════
+   HEADER
+══════════════════════════════════════════════ */
+#hdr{
+  position:fixed;top:0;left:0;right:0;z-index:800;
+  padding:clamp(14px,2vw,22px) var(--g);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background .45s,box-shadow .45s,padding .45s;
+}
+#hdr.solid{
+  background:rgba(255,255,255,.96);backdrop-filter:blur(18px);
+  box-shadow:0 1px 0 var(--bdr3),var(--shadow);
+  padding:clamp(10px,1.4vw,16px) var(--g);
+}
+.hdr-logo{display:flex;align-items:center;gap:10px;}
+.hdr-drop{
+  width:38px;height:38px;background:var(--navy);border-radius:50% 50% 40% 60%;
+  display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;
+  transition:transform .3s;
+}
+#hdr:hover .hdr-drop{transform:scale(1.1) rotate(-6deg);}
+.hdr-name{font-family:var(--serif);font-size:clamp(14px,1.6vw,19px);font-weight:600;color:#d4ae40;line-height:1.1;letter-spacing:.01em;}
+.hdr-sub{font-size:8px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;font-weight:600;margin-top:1px;}
+.nav-d{display:flex;align-items:center;gap:clamp(14px,2vw,28px);}
+.nav-d a{font-size:13px;font-weight:500;color:var(--t2);letter-spacing:.03em;position:relative;transition:color .25s;}
+.nav-d a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1.5px;background:var(--gold);border-radius:2px;transition:width .3s;}
+.nav-d a:hover{color:var(--gold);}
+.nav-d a:hover::after{width:100%;}
+.nav-cta{background:var(--navy);color:var(--white);padding:10px 22px;border-radius:var(--rad3);font-size:13px;font-weight:600;letter-spacing:.04em;transition:all .3s;}
+.nav-cta:hover{background:var(--gold);transform:translateY(-1px);box-shadow:0 8px 20px rgba(184,149,42,.35);}
+.ham{display:none;flex-direction:column;justify-content:center;gap:5px;width:36px;height:36px;background:none;border:none;cursor:pointer;padding:4px;}
+.ham span{display:block;height:1.5px;background:var(--navy);transform-origin:center;transition:all .35s;}
+.ham span:nth-child(2){width:68%;}
+.ham span:nth-child(3){width:84%;}
+.ham.open span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+.ham.open span:nth-child(2){opacity:0;}
+.ham.open span:nth-child(3){transform:rotate(-45deg) translate(5px,-5px);width:100%;}
+.mob-bg{position:fixed;inset:0;background:rgba(12,26,46,.5);backdrop-filter:blur(4px);z-index:799;opacity:0;pointer-events:none;transition:opacity .35s;}
+.mob-bg.open{opacity:1;pointer-events:all;}
+.mob-drawer{position:fixed;top:0;right:-110%;bottom:0;width:min(300px,88vw);background:var(--white);border-left:1px solid var(--bdr3);z-index:800;display:flex;flex-direction:column;padding:0;transition:right .5s cubic-bezier(.16,1,.3,1);overflow-y:auto;}
+.mob-drawer.open{right:0;}
+.mob-hdr{background:var(--navy);padding:22px 22px;display:flex;align-items:center;gap:12px;}
+.mob-drop{width:34px;height:34px;background:var(--gold);border-radius:50% 50% 40% 60%;display:flex;align-items:center;justify-content:center;font-size:1rem;}
+.mob-name{font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--white);}
+.mob-sub{font-size:8px;letter-spacing:.2em;color:rgba(255,255,255,.45);text-transform:uppercase;margin-top:2px;}
+.mob-links{display:flex;flex-direction:column;}
+.mob-links a{display:flex;align-items:center;justify-content:space-between;padding:15px 22px;border-bottom:1px solid var(--bdr3);font-size:14px;font-weight:500;color:var(--t2);transition:color .25s,background .25s;}
+.mob-links a:hover{color:var(--gold);background:var(--gold4);}
+.mob-links a em{font-style:normal;font-size:9px;color:var(--t3);}
+.mob-foot{margin-top:auto;padding:20px 22px;border-top:1px solid var(--bdr3);}
+.mob-foot p{font-size:11px;color:var(--t3);line-height:1.85;margin-bottom:14px;}
+.mob-cta{display:block;width:100%;background:var(--navy);color:var(--white);text-align:center;padding:13px;border-radius:var(--rad2);font-size:13px;font-weight:600;letter-spacing:.04em;transition:background .25s;}
+.mob-cta:hover{background:var(--gold);}
+@media(max-width:860px){.nav-d{display:none;}.ham{display:flex;}.nav-cta{display:none;}}
+
+/* ══════════════════════════════════════════════
+   HERO — full-height luxury split
+══════════════════════════════════════════════ */
+#hero{
+  position:relative;min-height:100vh;overflow:hidden;
+  background:var(--navy);
+  display:flex;align-items:stretch;
+}
+/* animated water ripple bg */
+.hero-ripple{
+  position:absolute;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse at 20% 60%,rgba(184,149,42,.12) 0%,transparent 55%),
+    radial-gradient(ellipse at 80% 30%,rgba(30,74,122,.5) 0%,transparent 55%),
+    radial-gradient(ellipse at 50% 100%,rgba(0,30,60,.8) 0%,transparent 60%),
+    linear-gradient(160deg,#0c1a2e 0%,#1a2e45 60%,#0a1828 100%);
+}
+.hero-wave{position:absolute;bottom:0;left:0;right:0;z-index:1;}
+.hero-wave svg{width:100%;height:auto;display:block;}
+/* floating orbs */
+.orb{position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;z-index:0;}
+.orb1{width:400px;height:400px;background:rgba(184,149,42,.08);top:-80px;right:10%;animation:orb1 12s ease-in-out infinite;}
+.orb2{width:300px;height:300px;background:rgba(30,74,122,.2);bottom:10%;left:-50px;animation:orb2 10s ease-in-out infinite;}
+@keyframes orb1{0%,100%{transform:translate(0,0);}50%{transform:translate(-30px,20px);}}
+@keyframes orb2{0%,100%{transform:translate(0,0);}50%{transform:translate(20px,-15px);}}
+
+.hero-body{
+  position:relative;z-index:3;
+  width:100%;padding:130px var(--g) 100px;
+  display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,80px);
+  align-items:center;
+}
+.hero-left{}
+.hero-sup{display:inline-flex;align-items:center;gap:10px;background:rgba(184,149,42,.14);border:1px solid rgba(184,149,42,.3);border-radius:var(--rad3);padding:6px 16px;margin-bottom:24px;}
+.hs-dot{width:6px;height:6px;background:var(--gold2);border-radius:50%;animation:gdot 1.8s ease-in-out infinite;}
+@keyframes gdot{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.4;transform:scale(1.6);}}
+.hs-txt{font-size:11px;font-weight:600;color:var(--gold2);letter-spacing:.12em;text-transform:uppercase;}
+.hero-h1{font-family:var(--serif);font-size:clamp(2.8rem,5.5vw,5.8rem);font-weight:300;line-height:1.04;letter-spacing:-.01em;color:var(--white);margin-bottom:20px;}
+.hero-h1 em{font-style:italic;color:var(--gold2);}
+.hero-p{font-size:clamp(13px,1.2vw,16px);color:rgba(255,255,255,.62);line-height:1.82;max-width:440px;margin-bottom:36px;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:48px;}
+.btn-gold{display:inline-flex;align-items:center;gap:8px;background:var(--ggrad);color:var(--navy);padding:14px 28px;border-radius:var(--rad3);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;transition:all .3s;border:none;}
+.btn-gold:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(184,149,42,.4);filter:brightness(1.08);}
+.btn-wht{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.08);color:var(--white);padding:13px 26px;border-radius:var(--rad3);font-size:13px;font-weight:600;border:1.5px solid rgba(255,255,255,.2);transition:all .3s;}
+.btn-wht:hover{background:rgba(255,255,255,.14);border-color:var(--gold);}
+.hero-trust{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}
+.ht-avs{display:flex;}
+.ht-avs img{width:34px;height:34px;border-radius:50%;border:2px solid var(--navy);object-fit:cover;margin-left:-8px;}
+.ht-avs img:first-child{margin-left:0;}
+.ht-txt{font-size:12px;color:rgba(255,255,255,.55);}
+.ht-txt strong{color:var(--gold2);}
+
+/* hero right — bottle visual */
+.hero-right{position:relative;display:flex;align-items:center;justify-content:center;}
+.hero-bottle-frame{
+  position:relative;width:clamp(260px,35vw,420px);
+  aspect-ratio:9/16;border-radius:var(--rad2);overflow:hidden;
+  box-shadow:0 30px 80px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.1);
+}
+.hero-bottle-frame img{width:100%;height:100%;object-fit:cover;object-position:center;}
+.hero-bottle-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,26,46,.6) 0%,transparent 50%);}
+/* Floating badge cards */
+.hbc{
+  position:absolute;background:rgba(255,255,255,.1);backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,.15);border-radius:var(--rad2);
+  padding:12px 16px;display:flex;align-items:center;gap:10px;white-space:nowrap;
+}
+.hbc:nth-child(3){top:12%;right:-60px;}
+.hbc:nth-child(4){bottom:18%;left:-55px;}
+.hbc-ico{width:34px;height:34px;background:var(--gold5);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.hbc-val{font-size:14px;font-weight:700;color:var(--white);line-height:1;}
+.hbc-lbl{font-size:10px;color:rgba(255,255,255,.55);margin-top:2px;}
+.hero-stats-row{display:flex;gap:clamp(20px,3.5vw,44px);flex-wrap:wrap;margin-top:24px;}
+.hst{border-top:1.5px solid rgba(255,255,255,.15);padding-top:12px;flex:1;min-width:70px;}
+.hst-n{font-family:var(--serif);font-size:clamp(1.5rem,2.8vw,2.4rem);font-weight:600;color:var(--gold2);line-height:1;}
+.hst-l{font-size:9px;letter-spacing:.18em;color:rgba(255,255,255,.4);text-transform:uppercase;margin-top:3px;font-weight:500;}
+
+@media(max-width:860px){
+  .hero-body{grid-template-columns:1fr;}
+  .hero-right{order:-1;justify-content:center;}
+  .hero-bottle-frame{width:min(260px,70vw);aspect-ratio:3/4;}
+  .hbc:nth-child(3){right:-20px;top:8%;}
+  .hbc:nth-child(4){left:-10px;bottom:8%;}
+}
+@media(max-width:480px){
+  .hero-btns{flex-direction:column;}
+  .btn-gold,.btn-wht{justify-content:center;}
+  .hbc{display:none;}
+}
+
+/* ══════════════════════════════════════════════
+   TICKER
+══════════════════════════════════════════════ */
+.ticker{background:var(--gold);overflow:hidden;padding:11px 0;position:relative;}
+.ticker::before,.ticker::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:1;}
+.ticker::before{left:0;background:linear-gradient(to right,var(--gold),transparent);}
+.ticker::after{right:0;background:linear-gradient(to left,var(--gold),transparent);}
+.ticker-inner{display:flex;width:max-content;animation:tkr 28s linear infinite;}
+@keyframes tkr{to{transform:translateX(-50%);}}
+.ti{font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--navy);font-weight:700;padding:0 40px;white-space:nowrap;}
+.ti-dot{color:rgba(12,26,46,.3);margin:0 4px;}
+
+/* ══════════════════════════════════════════════
+   SHARED SECTION UTILS
+══════════════════════════════════════════════ */
+.sec{padding:clamp(64px,10vh,120px) var(--g);transition:background .35s;}
+.sec-cream{background:var(--off);}
+.sec-navy{background:var(--navy);}
+.eye{display:inline-flex;align-items:center;gap:10px;margin-bottom:clamp(10px,1.5vh,16px);}
+.eye-line{width:24px;height:2px;background:var(--gold);border-radius:2px;flex-shrink:0;}
+.eye-txt{font-size:10px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase;font-weight:700;}
+.eye.wh .eye-line{background:rgba(255,255,255,.4);}
+.eye.wh .eye-txt{color:rgba(255,255,255,.6);}
+.sh2{font-family:var(--serif);font-size:clamp(1.9rem,4vw,3.8rem);font-weight:400;letter-spacing:-.01em;line-height:1.1;color:var(--text);margin-bottom:clamp(12px,2vh,20px);}
+.sh2 em{font-style:italic;color:var(--gold);}
+.sh2.wh{color:var(--white);}
+.sh2.center{text-align:center;}
+.sp{font-size:clamp(13px,1.1vw,15px);color:var(--t2);line-height:1.82;}
+.sp.wh{color:rgba(255,255,255,.6);}
+.sp.center{text-align:center;}
+
+/* Gold divider */
+.gold-div{width:60px;height:2px;background:var(--ggrad);border-radius:2px;margin:20px auto;}
+
+/* ══════════════════════════════════════════════
+   WHY MOONSOON — icon-cards
+══════════════════════════════════════════════ */
+.why-intro{text-align:center;max-width:600px;margin:0 auto clamp(44px,7vh,72px);}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,2vw,22px);}
+.wcard{background:var(--white);border:1px solid var(--bdr3);border-radius:var(--rad2);padding:clamp(24px,3vw,36px) clamp(18px,2vw,26px);text-align:center;transition:all .38s;cursor:default;position:relative;overflow:hidden;}
+.wcard::after{content:'';position:absolute;inset:0;background:var(--navy);opacity:0;transition:opacity .38s;z-index:0;}
+.wcard:hover{border-color:var(--gold);transform:translateY(-5px);box-shadow:var(--shadow2);}
+.wcard:hover::after{opacity:1;}
+.wcard:hover .wc-icon,.wcard:hover .wc-title,.wcard:hover .wc-desc{color:var(--white) !important;}
+.wcard:hover .wc-icon{background:rgba(255,255,255,.12);}
+.wc-icon{width:56px;height:56px;background:var(--gold5);border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;font-size:1.5rem;position:relative;z-index:1;transition:background .38s;}
+.wc-title{font-family:var(--serif);font-size:clamp(1.05rem,1.6vw,1.25rem);font-weight:600;color:var(--text);margin-bottom:8px;position:relative;z-index:1;transition:color .38s;}
+.wc-desc{font-size:12px;color:var(--t2);line-height:1.75;position:relative;z-index:1;transition:color .38s;}
+@media(max-width:900px){.why-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.why-grid{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════
+   SERVICES — 3 offerings, detailed bento
+══════════════════════════════════════════════ */
+.srv-intro{display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,80px);align-items:end;margin-bottom:clamp(44px,7vh,72px);}
+.srv-link{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--gold);margin-top:14px;transition:gap .25s;}
+.srv-link:hover{gap:10px;}
+/* Big service layout */
+.svc-big{display:grid;grid-template-columns:1fr 1fr;gap:clamp(14px,2vw,22px);}
+.svc-tall{display:flex;flex-direction:column;gap:clamp(14px,2vw,22px);}
+.svc-card{
+  background:var(--white);border:1px solid var(--bdr3);border-radius:var(--rad2);
+  padding:clamp(28px,3.5vw,44px);overflow:hidden;position:relative;
+  transition:all .38s;
+}
+.svc-card:hover{border-color:var(--gold);box-shadow:var(--shadow2);transform:translateY(-4px);}
+.svc-card.featured{background:var(--navy);border-color:var(--navy);}
+.svc-card.featured .svc-cat,.svc-card.featured .svc-title,.svc-card.featured .svc-desc,.svc-card.featured .svc-features li{color:var(--white) !important;}
+.svc-card.featured .svc-cat{color:var(--gold2) !important;}
+.svc-card.featured .svc-features li::before{color:var(--gold2) !important;}
+.svc-num{font-family:var(--serif);font-size:4rem;font-weight:300;color:var(--bdr3);position:absolute;top:16px;right:20px;line-height:1;transition:color .38s;}
+.svc-card:hover .svc-num{color:var(--gold5);}
+.svc-card.featured .svc-num{color:rgba(255,255,255,.05);}
+.svc-icon{width:52px;height:52px;background:var(--gold5);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:18px;transition:background .38s;}
+.svc-card:hover .svc-icon{background:var(--gold4);}
+.svc-card.featured .svc-icon{background:rgba(255,255,255,.1);}
+.svc-cat{font-size:10px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:8px;}
+.svc-title{font-family:var(--serif);font-size:clamp(1.2rem,2vw,1.6rem);font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.2;}
+.svc-desc{font-size:13px;color:var(--t2);line-height:1.75;margin-bottom:18px;}
+.svc-features{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.svc-features li{font-size:12px;color:var(--t2);display:flex;align-items:center;gap:8px;}
+.svc-features li::before{content:'✓';color:var(--gold);font-weight:700;font-size:10px;flex-shrink:0;}
+@media(max-width:900px){.srv-intro{grid-template-columns:1fr;gap:20px;}.svc-big{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════
+   ABOUT — story section
+══════════════════════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center;}
+.about-img-wrap{position:relative;}
+.about-main-img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--rad2);box-shadow:var(--shadow2);}
+.about-float{
+  position:absolute;bottom:-20px;right:-20px;
+  background:var(--white);border-radius:var(--rad2);padding:18px 22px;
+  box-shadow:var(--shadow2);border:1px solid var(--bdr3);text-align:center;min-width:140px;
+}
+.af-n{font-family:var(--serif);font-size:2.2rem;font-weight:600;color:var(--gold);line-height:1;}
+.af-l{font-size:10px;letter-spacing:.14em;color:var(--t3);text-transform:uppercase;font-weight:600;margin-top:3px;}
+.about-gold-border{
+  position:absolute;top:-14px;left:-14px;right:30px;bottom:30px;
+  border:2px solid var(--bdr);border-radius:var(--rad2);pointer-events:none;
+}
+.about-points{display:flex;flex-direction:column;gap:clamp(14px,2.5vh,22px);margin-top:clamp(24px,4vh,40px);}
+.apt{display:flex;gap:16px;align-items:flex-start;padding-bottom:clamp(14px,2.5vh,22px);border-bottom:1px solid var(--bdr3);}
+.apt:last-child{border:none;padding-bottom:0;}
+.apt-icon{width:42px;height:42px;background:var(--gold5);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;border:1px solid var(--bdr);transition:all .3s;}
+.apt:hover .apt-icon{background:var(--navy);border-color:var(--navy);}
+.apt-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.apt-desc{font-size:13px;color:var(--t2);line-height:1.7;}
+@media(max-width:860px){.about-grid{grid-template-columns:1fr;}.about-float{right:8px;bottom:-10px;}.about-gold-border{left:-8px;top:-8px;}}
+
+/* ══════════════════════════════════════════════
+   PROCESS — clean steps
+══════════════════════════════════════════════ */
+.proc-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:clamp(44px,7vh,72px);}
+.proc-flow{display:grid;grid-template-columns:repeat(5,1fr);gap:0;position:relative;}
+.proc-flow::before{content:'';position:absolute;top:28px;left:10%;right:10%;height:1.5px;background:linear-gradient(to right,var(--gold),rgba(184,149,42,.2));z-index:0;}
+.pstep{display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 clamp(6px,1.5vw,18px);position:relative;z-index:1;}
+.ps-ring{
+  width:58px;height:58px;border-radius:50%;
+  background:var(--white);border:2px solid var(--bdr2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1.05rem;font-weight:600;color:var(--t3);
+  margin-bottom:18px;transition:all .35s;flex-shrink:0;
+}
+.pstep:hover .ps-ring{background:var(--navy);border-color:var(--navy);color:var(--gold2);transform:scale(1.08);}
+.ps-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:5px;}
+.ps-desc{font-size:11px;color:var(--t3);line-height:1.65;}
+@media(max-width:860px){.proc-intro{grid-template-columns:1fr;gap:20px;}.proc-flow{grid-template-columns:1fr 1fr;gap:clamp(16px,3vw,28px);}.proc-flow::before{display:none;}}
+@media(max-width:480px){.proc-flow{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════
+   STATS BAND
+══════════════════════════════════════════════ */
+.stats-band{background:var(--navy);padding:clamp(44px,7vh,80px) var(--g);}
+.stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.06);}
+.sstat{padding:clamp(28px,4.5vh,50px) clamp(16px,2vw,32px);text-align:center;background:var(--navy);}
+.sstat-icon{font-size:1.6rem;margin-bottom:12px;}
+.sstat-n{font-family:var(--serif);font-size:clamp(2.2rem,4vw,3.5rem);font-weight:600;color:var(--gold2);line-height:1;margin-bottom:8px;}
+.sstat-l{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.45);font-weight:600;}
+@media(max-width:700px){.stats-inner{grid-template-columns:1fr 1fr;}}
+@media(max-width:380px){.stats-inner{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════
+   WATER QUALITY SECTION
+══════════════════════════════════════════════ */
+.quality-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:center;}
+.quality-visual{position:relative;}
+.quality-img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--rad2);box-shadow:var(--shadow2);}
+.q-cert{
+  position:absolute;top:-18px;right:-18px;
+  width:90px;height:90px;border-radius:50%;
+  background:var(--ggrad);display:flex;flex-direction:column;align-items:center;justify-content:center;
+  box-shadow:0 8px 24px rgba(184,149,42,.4);text-align:center;
+}
+.q-cert-label{font-size:8px;font-weight:700;color:var(--navy);letter-spacing:.08em;text-transform:uppercase;line-height:1.2;}
+.q-cert-n{font-family:var(--serif);font-size:1.4rem;font-weight:700;color:var(--navy);line-height:1;}
+.quality-specs{display:grid;grid-template-columns:1fr 1fr;gap:clamp(12px,2vw,20px);margin-top:clamp(24px,4vh,40px);}
+.qspec{background:var(--gold4);border:1px solid var(--bdr);border-radius:var(--rad2);padding:18px 20px;}
+.qspec-label{font-size:10px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:5px;}
+.qspec-val{font-family:var(--serif);font-size:1.5rem;font-weight:600;color:var(--text);line-height:1;}
+.qspec-note{font-size:11px;color:var(--t3);margin-top:3px;}
+@media(max-width:860px){.quality-grid{grid-template-columns:1fr;}.q-cert{right:8px;top:-10px;}}
+
+/* ══════════════════════════════════════════════
+   GALLERY STRIP
+══════════════════════════════════════════════ */
+.gallery-sec{padding:clamp(60px,9vh,100px) 0;}
+.gallery-hdr{padding:0 var(--g);margin-bottom:clamp(28px,4vh,48px);}
+.gstrip{display:flex;gap:clamp(10px,1.5vw,16px);padding:0 var(--g) 10px;overflow-x:auto;scrollbar-width:none;}
+.gstrip::-webkit-scrollbar{display:none;}
+.gitem{flex:0 0 clamp(200px,24vw,340px);aspect-ratio:3/4;overflow:hidden;border-radius:var(--rad2);position:relative;}
+.gitem img{width:100%;height:100%;object-fit:cover;transition:transform .55s;}
+.gitem:hover img{transform:scale(1.06);}
+.gitem-label{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;background:linear-gradient(to top,rgba(12,26,46,.8),transparent);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.85);font-weight:600;opacity:0;transform:translateY(6px);transition:all .35s;}
+.gitem:hover .gitem-label{opacity:1;transform:translateY(0);}
+
+/* ══════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════ */
+.testi-intro{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:clamp(36px,5.5vh,64px);}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);}
+.xcard{background:var(--white);border:1.5px solid var(--bdr3);border-radius:var(--rad2);padding:clamp(22px,3vw,36px);border-top:3px solid var(--gold);transition:all .35s;}
+.xcard:hover{transform:translateY(-4px);box-shadow:var(--shadow2);}
+.xc-stars{display:flex;gap:3px;margin-bottom:12px;}
+.xc-stars span{font-size:13px;color:var(--gold);}
+.xc-big-q{font-family:var(--serif);font-size:2.5rem;color:var(--gold5);line-height:.7;margin-bottom:8px;}
+.xc-text{font-family:var(--serif);font-size:clamp(.95rem,1.3vw,1.1rem);color:var(--text);line-height:1.72;font-style:italic;margin-bottom:20px;}
+.xc-auth{display:flex;align-items:center;gap:12px;padding-top:16px;border-top:1px solid var(--bdr3);}
+.xc-av{width:40px;height:40px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid var(--cream2);}
+.xc-av img{width:40px;height:40px;object-fit:cover;}
+.xc-name{font-size:13px;font-weight:600;color:var(--text);}
+.xc-co{font-size:11px;color:var(--gold);font-weight:600;margin-top:2px;}
+@media(max-width:860px){.testi-intro{grid-template-columns:1fr;gap:20px;}.testi-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:540px){.testi-grid{grid-template-columns:1fr;}}
+
+/* ══════════════════════════════════════════════
+   PRICING
+══════════════════════════════════════════════ */
+.pricing-hdr{text-align:center;max-width:580px;margin:0 auto clamp(44px,7vh,72px);}
+.prc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px);max-width:940px;margin:0 auto;}
+.pc{background:var(--white);border:1.5px solid var(--bdr3);border-radius:var(--rad2);padding:clamp(24px,3.2vw,40px);position:relative;transition:all .35s;}
+.pc:hover{border-color:var(--gold);box-shadow:var(--shadow2);}
+.pc.feat{background:var(--navy);border-color:var(--navy);}
+.pc.feat *{color:var(--white) !important;}
+.pc.feat .pc-div{background:rgba(255,255,255,.12) !important;}
+.pc.feat .pc-list li::before{color:var(--gold2) !important;}
+.pc.feat .pc-btn{background:var(--ggrad) !important;color:var(--navy) !important;border-color:transparent !important;}
+.pc-badge{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--ggrad);color:var(--navy) !important;font-size:9px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;padding:5px 14px;border-radius:0 0 8px 8px;white-space:nowrap;}
+.pc-icon{font-size:1.8rem;margin-bottom:14px;}
+.pc-tier{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--t3);font-weight:700;margin-bottom:10px;}
+.pc-price{font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.6rem);font-weight:600;color:var(--text);line-height:1;margin-bottom:4px;letter-spacing:-.02em;}
+.pc-price small{font-size:.4em;font-family:var(--sans);font-weight:400;vertical-align:super;}
+.pc-cycle{font-size:11px;color:var(--t3);margin-bottom:20px;}
+.pc-div{height:1px;background:var(--bdr3);margin-bottom:20px;}
+.pc-list{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:24px;}
+.pc-list li{font-size:13px;color:var(--t2);display:flex;align-items:center;gap:8px;}
+.pc-list li::before{content:'✓';color:var(--gold);font-weight:700;font-size:11px;flex-shrink:0;}
+.pc-btn{width:100%;padding:13px;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--cream);color:var(--text);border:1.5px solid var(--bdr2);border-radius:var(--rad);transition:all .3s;}
+.pc-btn:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+@media(max-width:760px){.prc-grid{grid-template-columns:1fr;max-width:420px;}}
+
+/* ══════════════════════════════════════════════
+   FAQ
+══════════════════════════════════════════════ */
+.faq-wrap{display:grid;grid-template-columns:5fr 7fr;gap:clamp(36px,6vw,100px);align-items:start;}
+.faq-sticky{position:sticky;top:100px;}
+.faq-list{display:flex;flex-direction:column;}
+.fq{border-bottom:1px solid var(--bdr3);}
+.fq-q{display:flex;align-items:center;justify-content:space-between;padding:clamp(14px,2vh,22px) 0;cursor:pointer;font-size:clamp(13px,1.1vw,15px);font-weight:500;color:var(--t2);transition:color .28s;user-select:none;gap:14px;}
+.fq-q:hover{color:var(--text);}
+.fq-q.on{color:var(--gold);}
+.fq-ico{width:22px;height:22px;border-radius:50%;border:1.5px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--t3);flex-shrink:0;transition:all .28s;font-style:normal;}
+.fq-q.on .fq-ico{border-color:var(--gold);color:var(--gold);transform:rotate(45deg);}
+.fq-body{height:0;overflow:hidden;transition:height .38s cubic-bezier(.16,1,.3,1);}
+.fq-body-in{padding:0 0 16px;font-size:13px;color:var(--t2);line-height:1.85;}
+@media(max-width:760px){.faq-wrap{grid-template-columns:1fr;}.faq-sticky{position:static;}}
+
+/* ══════════════════════════════════════════════
+   CONTACT / ORDER FORM
+══════════════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,100px);align-items:start;}
+.contact-items{display:flex;flex-direction:column;gap:0;margin-top:clamp(22px,3.5vh,36px);}
+.ci{display:flex;gap:14px;padding:clamp(14px,2vh,22px) 0;border-bottom:1px solid var(--bdr3);}
+.ci:last-child{border:none;}
+.ci-ico{width:42px;height:42px;background:var(--gold5);border-radius:var(--rad);border:1px solid var(--bdr);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;transition:all .3s;}
+.ci:hover .ci-ico{background:var(--navy);}
+.ci-lbl{font-size:9px;letter-spacing:.18em;color:var(--t3);text-transform:uppercase;font-weight:700;margin-bottom:4px;}
+.ci-val{font-size:clamp(12px,1.1vw,14px);color:var(--t2);line-height:1.65;}
+.form-wrap{background:var(--white);border:1px solid var(--bdr2);border-radius:var(--rad2);padding:clamp(24px,3.5vw,44px);box-shadow:var(--shadow);border-top:3px solid var(--gold);}
+.fw-title{font-family:var(--serif);font-size:clamp(1.3rem,2.2vw,1.8rem);font-weight:600;color:var(--text);margin-bottom:6px;}
+.fw-sub{font-size:13px;color:var(--t3);margin-bottom:24px;}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;}
+.cf-field{display:flex;flex-direction:column;gap:6px;}
+.cf-field.full{grid-column:span 2;}
+.cf-label{font-size:10px;font-weight:700;color:var(--t2);letter-spacing:.08em;text-transform:uppercase;}
+.cf-input{background:var(--off);border:1.5px solid var(--bdr3);border-radius:var(--rad);padding:11px 14px;font-size:13px;color:var(--text);font-family:var(--sans);outline:none;transition:border-color .28s,background .28s;width:100%;}
+.cf-input:focus{border-color:var(--gold);background:var(--white);}
+.cf-input::placeholder{color:var(--t3);}
+.cf-select{-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8ea0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;}
+.cf-submit{width:100%;background:var(--navy);color:var(--white);padding:14px;border-radius:var(--rad);font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:6px;transition:all .3s;}
+.cf-submit:hover{background:var(--gold);transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,149,42,.35);}
+@media(max-width:860px){.contact-grid{grid-template-columns:1fr;}.cf-row{grid-template-columns:1fr;}.cf-field.full{grid-column:1;}}
+
+/* ══════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════ */
+footer{background:var(--navy);}
+.ft-top{padding:clamp(52px,8vh,100px) var(--g);display:grid;grid-template-columns:2.5fr 1fr 1fr 1fr;gap:clamp(24px,4vw,52px);}
+.ft-brand-drop{width:44px;height:44px;background:var(--gold);border-radius:50% 50% 40% 60%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px;}
+.ft-brand-name{font-family:var(--serif);font-size:1.2rem;font-weight:600;color:var(--white);margin-bottom:6px;}
+.ft-brand-name em{font-style:italic;color:var(--gold2);}
+.ft-brand-tagline{font-size:10px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;font-weight:600;margin-bottom:14px;}
+.ft-brand-desc{font-size:12px;color:rgba(255,255,255,.38);line-height:1.85;max-width:240px;margin-bottom:22px;}
+.ft-soc{display:flex;gap:8px;}
+.ft-soc-a{width:34px;height:34px;border-radius:8px;border:1px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.4);transition:all .28s;}
+.ft-soc-a:hover{background:var(--gold);border-color:var(--gold);color:var(--navy);}
+.ft-col-h{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:18px;}
+.ft-col-l{display:flex;flex-direction:column;gap:10px;}
+.ft-col-l a{font-size:13px;color:rgba(255,255,255,.45);transition:color .25s;}
+.ft-col-l a:hover{color:rgba(255,255,255,.85);}
+.ft-cert-band{background:rgba(255,255,255,.03);border-top:1px solid rgba(255,255,255,.06);padding:20px var(--g);display:flex;align-items:center;gap:clamp(16px,3vw,40px);flex-wrap:wrap;}
+.ft-cert{display:flex;align-items:center;gap:8px;font-size:11px;color:rgba(255,255,255,.38);font-weight:500;letter-spacing:.04em;}
+.ft-cert-ico{font-size:1rem;}
+.ft-bot{border-top:1px solid rgba(255,255,255,.06);padding:20px var(--g);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+.ft-bot span{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.22);}
+@media(max-width:860px){.ft-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.ft-top{grid-template-columns:1fr;}.ft-bot{flex-direction:column;text-align:center;}}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media(max-width:400px){
+  .hero-h1{font-size:2.4rem;}
+  .sh2{font-size:1.75rem;}
+}
+@media(max-width:320px){
+  :root{--g:16px;}
+  .hero-h1{font-size:2rem;}
+  .sh2{font-size:1.5rem;}
+  .hdr-sub{display:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="ld-drop"></div>
+  <div class="ld-name">Moonsoon <span>Minerals</span></div>
+  <div class="ld-tagline">Premium Drinking Water</div>
+  <div class="ld-bar-wrap"><div class="ld-bar" id="ldBar"></div></div>
+  <div class="ld-pct" id="ldPct">0%</div>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <div class="hdr-logo">
+    <div class="hdr-drop">💧</div>
+    <div>
+      <div class="hdr-name">Moonsoon Minerals</div>
+      <div class="hdr-sub">Premium Drinking Water</div>
+    </div>
+  </div>
+  <nav class="nav-d">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#quality">Quality</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#contact">Order Now</a>
+    <a href="#contact" class="nav-cta">Get a Quote</a>
+  </nav>
+  <button class="ham" id="ham"><span></span><span></span><span></span></button>
+</header>
+
+<!-- MOBILE DRAWER -->
+<div class="mob-bg" id="mobBg"></div>
+<div class="mob-drawer" id="mobDrawer">
+  <div class="mob-hdr">
+    <div class="mob-drop">💧</div>
+    <div>
+      <div class="mob-name">Moonsoon Minerals</div>
+      <div class="mob-sub">Premium Drinking Water</div>
+    </div>
+  </div>
+  <nav class="mob-links">
+    <a href="#services"><span>Services</span><em>01</em></a>
+    <a href="#about"><span>About Us</span><em>02</em></a>
+    <a href="#quality"><span>Water Quality</span><em>03</em></a>
+    <a href="#pricing"><span>Pricing</span><em>04</em></a>
+    <a href="#process"><span>Process</span><em>05</em></a>
+    <a href="#contact"><span>Contact</span><em>06</em></a>
+  </nav>
+  <div class="mob-foot">
+    <p>Karachi, Pakistan<br>+92 300 000 0000<br>info@moonsoonminerals.pk</p>
+    <a href="#contact" class="mob-cta">Place an Order →</a>
+  </div>
+</div>
+
+<main>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-ripple"></div>
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="hero-body">
+    <div class="hero-left">
+      <div class="hero-sup"><span class="hs-dot"></span><span class="hs-txt">ISO 9001 Certified · Est. 2018</span></div>
+      <h1 class="hero-h1">
+        Pure Water.<br><em>Pure Life.</em><br>Delivered.
+      </h1>
+      <p class="hero-p">Moonsoon Minerals brings you laboratory-tested RO purified water — whether you need a complete plant installation, custom branded bottles, or daily per-litre supply for your home or business.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-gold">Order Now →</a>
+        <a href="#services" class="btn-wht">Explore Services</a>
+      </div>
+      <div class="hero-trust">
+        <div class="ht-avs">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&q=80" alt=""/>
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt=""/>
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt=""/>
+        </div>
+        <div class="ht-txt">Trusted by <strong>500+</strong> homes & businesses in Karachi</div>
+      </div>
+      <div class="hero-stats-row">
+        <div class="hst"><div class="hst-n">500+</div><div class="hst-l">Clients Served</div></div>
+        <div class="hst"><div class="hst-n">99.9%</div><div class="hst-l">Purity Rate</div></div>
+        <div class="hst"><div class="hst-n">6 Yrs</div><div class="hst-l">Experience</div></div>
+        <div class="hst"><div class="hst-n">24/7</div><div class="hst-l">Support</div></div>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-bottle-frame">
+        <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=800&q=80" alt="Moonsoon Minerals premium water"/>
+        <div class="hero-bottle-overlay"></div>
+      </div>
+      <div class="hbc">
+        <div class="hbc-ico">🧪</div>
+        <div><div class="hbc-val">Lab Tested</div><div class="hbc-lbl">Every Batch</div></div>
+      </div>
+      <div class="hbc">
+        <div class="hbc-ico">⚡</div>
+        <div><div class="hbc-val">Same Day</div><div class="hbc-lbl">Delivery Available</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,50 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ti">RO Plant Installation<span class="ti-dot"> · </span></span>
+    <span class="ti">Custom Label Bottles<span class="ti-dot"> · </span></span>
+    <span class="ti">Per Litre Water Supply<span class="ti-dot"> · </span></span>
+    <span class="ti">Same Day Delivery<span class="ti-dot"> · </span></span>
+    <span class="ti">ISO 9001 Certified<span class="ti-dot"> · </span></span>
+    <span class="ti">Lab Tested Purity<span class="ti-dot"> · </span></span>
+    <span class="ti">Karachi Wide Coverage<span class="ti-dot"> · </span></span>
+    <span class="ti">RO Plant Installation<span class="ti-dot"> · </span></span>
+    <span class="ti">Custom Label Bottles<span class="ti-dot"> · </span></span>
+    <span class="ti">Per Litre Water Supply<span class="ti-dot"> · </span></span>
+    <span class="ti">Same Day Delivery<span class="ti-dot"> · </span></span>
+    <span class="ti">ISO 9001 Certified<span class="ti-dot"> · </span></span>
+    <span class="ti">Lab Tested Purity<span class="ti-dot"> · </span></span>
+    <span class="ti">Karachi Wide Coverage<span class="ti-dot"> · </span></span>
+  </div>
+</div>
+
+<!-- WHY MOONSOON -->
+<section class="sec" id="why">
+  <div class="why-intro">
+    <div class="eye" style="justify-content:center;"><div class="eye-line"></div><span class="eye-txt">Why Moonsoon</span><div class="eye-line"></div></div>
+    <h2 class="sh2 center">Water You Can <em>Trust.</em></h2>
+    <div class="gold-div"></div>
+    <p class="sp center">Every drop of Moonsoon Minerals water passes through a rigorous 7-stage purification process, ensuring the highest standards of purity, taste, and mineral balance.</p>
+  </div>
+  <div class="why-grid">
+    <div class="wcard">
+      <div class="wc-icon">🧬</div>
+      <div class="wc-title">7-Stage Purification</div>
+      <div class="wc-desc">Sediment filtration, activated carbon, reverse osmosis, UV sterilisation, and mineral balancing for perfect water.</div>
+    </div>
+    <div class="wcard">
+      <div class="wc-icon">🏆</div>
+      <div class="wc-title">ISO 9001 Certified</div>
+      <div class="wc-desc">Our production facility holds ISO 9001 certification. Every batch is independently lab-tested before delivery.</div>
+    </div>
+    <div class="wcard">
+      <div class="wc-icon">🚚</div>
+      <div class="wc-title">Reliable Delivery</div>
+      <div class="wc-desc">Same-day delivery across Karachi. Scheduled weekly and monthly supply chains for homes and businesses.</div>
+    </div>
+    <div class="wcard">
+      <div class="wc-icon">💎</div>
+      <div class="wc-title">Premium Quality</div>
+      <div class="wc-desc">TDS levels maintained at ideal 50–150 ppm. pH balanced between 7.2–7.8 for optimal hydration and taste.</div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="sec sec-cream" id="services">
+  <div class="srv-intro">
+    <div>
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">Our Services</span></div>
+      <h2 class="sh2">Three Ways We <em>Serve You.</em></h2>
+    </div>
+    <div>
+      <p class="sp">Whether you're a household looking for pure daily water, a brand wanting custom-labelled bottles, or a business needing a full RO plant — Moonsoon Minerals has you covered end-to-end.</p>
+      <a href="#contact" class="srv-link">Get a free consultation →</a>
+    </div>
+  </div>
+  <div class="svc-big">
+    <!-- Featured: RO Plant -->
+    <div class="svc-card featured" style="grid-row:span 2;">
+      <div class="svc-num">01</div>
+      <div class="svc-icon">🏭</div>
+      <div class="svc-cat">Plant Installation</div>
+      <div class="svc-title">RO Plant Installation & Maintenance</div>
+      <div class="svc-desc">We design, supply, install and maintain complete Reverse Osmosis water purification plants for commercial and industrial clients — from small offices to large factories, hospitals, and housing societies.</div>
+      <ul class="svc-features">
+        <li>Site survey & custom plant design</li>
+        <li>Commercial & industrial scale systems</li>
+        <li>Full equipment supply & certified installation</li>
+        <li>Annual maintenance contracts (AMC)</li>
+        <li>Emergency call-out within 4 hours</li>
+        <li>Spare parts supply & filter replacement</li>
+        <li>Water quality monitoring & testing</li>
+        <li>Operator training included</li>
+      </ul>
+    </div>
+    <div class="svc-tall">
+      <!-- Custom Bottles -->
+      <div class="svc-card">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">🍶</div>
+        <div class="svc-cat">Custom Label Bottles</div>
+        <div class="svc-title">Private Label Branded Water Bottles</div>
+        <div class="svc-desc">Launch your own branded water with Moonsoon Minerals behind the quality. Perfect for weddings, corporate events, hotels, restaurants, and brand gifting.</div>
+        <ul class="svc-features">
+          <li>250ml, 500ml, 1L & 1.5L sizes available</li>
+          <li>Full custom label design service</li>
+          <li>Minimum order: 500 bottles</li>
+          <li>5–7 day turnaround</li>
+        </ul>
+      </div>
+      <!-- Per Litre Supply -->
+      <div class="svc-card">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">💧</div>
+        <div class="svc-cat">Water Supply</div>
+        <div class="svc-title">Per Litre Water Supply Service</div>
+        <div class="svc-desc">Daily, weekly, or monthly RO purified water supply for homes, offices, and buildings. Delivered in sanitised, reusable 20-litre jerry cans or directly into your storage tank.</div>
+        <ul class="svc-features">
+          <li>Starting at PKR 3/litre bulk rates</li>
+          <li>Daily scheduled delivery available</li>
+          <li>Residential & commercial subscriptions</li>
+          <li>20L, 50L & tanker supply options</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="sec" id="about">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <div class="about-gold-border"></div>
+      <img class="about-main-img" src="https://images.unsplash.com/photo-1562016600-ece13e8ba570?w=900&q=80" alt="Moonsoon Minerals production facility"/>
+      <div class="about-float">
+        <div class="af-n">6+</div>
+        <div class="af-l">Years of Pure Water</div>
+      </div>
+    </div>
+    <div>
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">Our Story</span></div>
+      <h2 class="sh2">Clean Water Is Not a<br>Luxury — It's a <em>Right.</em></h2>
+      <p class="sp" style="margin-bottom:16px;">Founded in Karachi in 2018, Moonsoon Minerals was born from a simple belief: every Pakistani family deserves access to clean, safe, affordable drinking water without compromise.</p>
+      <p class="sp">From a single RO unit serving one neighbourhood, we have grown into a trusted supplier serving 500+ homes, offices, hotels, hospitals and events across Karachi — maintaining the same uncompromising quality standard every single day.</p>
+      <div class="about-points">
+        <div class="apt">
+          <div class="apt-icon">🌊</div>
+          <div><div class="apt-title">Source to Tap Transparency</div><div class="apt-desc">Every batch is traceable from raw water source through each filtration stage to final delivery. Full lab reports available on request.</div></div>
+        </div>
+        <div class="apt">
+          <div class="apt-icon">♻️</div>
+          <div><div class="apt-title">Sustainable Practice</div><div class="apt-desc">We operate reusable container systems to minimise plastic waste, and our RO plants are engineered for water efficiency with minimal reject water.</div></div>
+        </div>
+        <div class="apt">
+          <div class="apt-icon">👨‍🔬</div>
+          <div><div class="apt-title">Certified Technical Team</div><div class="apt-desc">Our engineers hold certifications in water treatment technology. All installations comply with PSQCA and international WHO standards.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec sec-cream" id="process">
+  <div class="proc-intro">
+    <div>
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">Purification Process</span></div>
+      <h2 class="sh2">7 Stages of <em>Pure.</em></h2>
+    </div>
+    <p class="sp">Our multi-stage RO purification system removes 99.9% of contaminants including bacteria, viruses, heavy metals, dissolved solids and chemical pollutants — leaving only perfectly balanced drinking water.</p>
+  </div>
+  <div class="proc-flow">
+    <div class="pstep"><div class="ps-ring">01</div><div class="ps-title">Sediment Filter</div><div class="ps-desc">Removes dust, sand and large particles.</div></div>
+    <div class="pstep"><div class="ps-ring">02</div><div class="ps-title">Carbon Block</div><div class="ps-desc">Eliminates chlorine, odour and organic compounds.</div></div>
+    <div class="pstep"><div class="ps-ring">03</div><div class="ps-title">RO Membrane</div><div class="ps-desc">0.0001 micron filtration — bacteria, viruses, heavy metals removed.</div></div>
+    <div class="pstep"><div class="ps-ring">04</div><div class="ps-title">UV Sterilisation</div><div class="ps-desc">UV light kills 99.9% of remaining microorganisms.</div></div>
+    <div class="pstep"><div class="ps-ring">05</div><div class="ps-title">Mineral Balance</div><div class="ps-desc">Essential minerals added back at optimal levels for health and taste.</div></div>
+  </div>
+</section>
+
+<!-- STATS BAND -->
+<div class="stats-band">
+  <div class="stats-inner">
+    <div class="sstat"><div class="sstat-icon">💧</div><div class="sstat-n">10M+</div><div class="sstat-l">Litres Supplied</div></div>
+    <div class="sstat"><div class="sstat-icon">🏠</div><div class="sstat-n">500+</div><div class="sstat-l">Happy Clients</div></div>
+    <div class="sstat"><div class="sstat-icon">🏭</div><div class="sstat-n">45+</div><div class="sstat-l">Plants Installed</div></div>
+    <div class="sstat"><div class="sstat-icon">⭐</div><div class="sstat-n">4.9★</div><div class="sstat-l">Client Rating</div></div>
+  </div>
+</div>
+
+<!-- WATER QUALITY -->
+<section class="sec" id="quality">
+  <div class="quality-grid">
+    <div class="quality-visual">
+      <img class="quality-img" src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=900&q=80" alt="Water quality testing"/>
+      <div class="q-cert"><div class="q-cert-n">ISO</div><div class="q-cert-label">Certified Quality</div></div>
+    </div>
+    <div>
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">Water Quality</span></div>
+      <h2 class="sh2">Numbers That <em>Prove</em> Purity.</h2>
+      <p class="sp" style="margin-bottom:8px;">Every batch of Moonsoon Minerals water is independently tested and certified. Our quality parameters consistently exceed Pakistan Standards & Quality Control Authority (PSQCA) requirements.</p>
+      <div class="quality-specs">
+        <div class="qspec"><div class="qspec-label">TDS Level</div><div class="qspec-val">50–150 ppm</div><div class="qspec-note">WHO recommended: &lt;500 ppm</div></div>
+        <div class="qspec"><div class="qspec-label">pH Balance</div><div class="qspec-val">7.2 – 7.8</div><div class="qspec-note">Ideal neutral range</div></div>
+        <div class="qspec"><div class="qspec-label">Bacteria</div><div class="qspec-val">0 CFU/ml</div><div class="qspec-note">Zero bacteria detected</div></div>
+        <div class="qspec"><div class="qspec-label">Heavy Metals</div><div class="qspec-val">ND</div><div class="qspec-note">Not detected — below detection limit</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-sec">
+  <div class="gallery-hdr">
+    <div class="eye"><div class="eye-line"></div><span class="eye-txt">Our Facility</span></div>
+    <h2 class="sh2">Moonsoon Minerals <em>in Action.</em></h2>
+  </div>
+  <div class="gstrip" id="gstrip">
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1562016600-ece13e8ba570?w=600&q=80" alt=""/><div class="gitem-label">Production Facility</div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?w=600&q=80" alt=""/><div class="gitem-label">Premium Bottles</div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1504893524553-b855bce32c67?w=600&q=80" alt=""/><div class="gitem-label">Water Source</div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=600&q=80" alt=""/><div class="gitem-label">Lab Testing</div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80" alt=""/><div class="gitem-label">Delivery Fleet</div></div>
+    <div class="gitem"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt=""/><div class="gitem-label">RO Plant</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="sec sec-cream" id="testimonials">
+  <div class="testi-intro">
+    <div>
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">Client Reviews</span></div>
+      <h2 class="sh2">What Our Customers <em>Say.</em></h2>
+    </div>
+    <p class="sp">Pure water, reliable service, and a team that truly cares. Here's what 500+ Karachi families and businesses say about Moonsoon Minerals.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="xcard">
+      <div class="xc-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <div class="xc-big-q">"</div>
+      <div class="xc-text">We switched to Moonsoon Minerals for our restaurant 2 years ago and have never looked back. The water quality is consistently excellent and delivery is always on time.</div>
+      <div class="xc-auth"><div class="xc-av"><img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80" alt=""/></div><div><div class="xc-name">Chef Adnan Qureshi</div><div class="xc-co">Restaurant Owner, Clifton</div></div></div>
+    </div>
+    <div class="xcard">
+      <div class="xc-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <div class="xc-big-q">"</div>
+      <div class="xc-text">Moonsoon installed a full RO plant for our factory of 200 workers. The team was professional, fast, and the water quality reports they provide monthly give us complete confidence.</div>
+      <div class="xc-auth"><div class="xc-av"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=200&q=80" alt=""/></div><div><div class="xc-name">Tariq Farooqui</div><div class="xc-co">Operations Director, DHA</div></div></div>
+    </div>
+    <div class="xcard">
+      <div class="xc-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+      <div class="xc-big-q">"</div>
+      <div class="xc-text">We ordered custom branded bottles for our wedding and they were absolutely beautiful. The quality matched the premium look perfectly. Every guest commented on them!</div>
+      <div class="xc-auth"><div class="xc-av"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=200&q=80" alt=""/></div><div><div class="xc-name">Sara Bilal</div><div class="xc-co">Wedding Client, Karachi</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="sec" id="pricing">
+  <div class="pricing-hdr">
+    <div class="eye" style="justify-content:center;"><div class="eye-line"></div><span class="eye-txt">Simple Pricing</span><div class="eye-line"></div></div>
+    <h2 class="sh2 center">Transparent, <em>Affordable</em> Plans.</h2>
+    <div class="gold-div"></div>
+    <p class="sp center">No hidden charges, no complicated contracts. Choose the plan that fits your water needs and we'll handle the rest.</p>
+  </div>
+  <div class="prc-grid">
+    <div class="pc">
+      <div class="pc-icon">💧</div>
+      <div class="pc-tier">Home Supply</div>
+      <div class="pc-price"><small>PKR</small> 3 <span style="font-size:.5em;font-weight:400">/litre</span></div>
+      <div class="pc-cycle">Bulk monthly subscription</div>
+      <div class="pc-div"></div>
+      <ul class="pc-list">
+        <li>Minimum 500 litres/month</li>
+        <li>Delivered in 20L jerry cans</li>
+        <li>Scheduled weekly delivery</li>
+        <li>Free first-month trial</li>
+        <li>Lab report on request</li>
+      </ul>
+      <button class="pc-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Start Home Supply</button>
+    </div>
+    <div class="pc feat">
+      <div class="pc-badge">Most Popular</div>
+      <div class="pc-icon">🍶</div>
+      <div class="pc-tier">Custom Label Bottles</div>
+      <div class="pc-price"><small>PKR</small> 35 <span style="font-size:.5em;font-weight:400">/bottle</span></div>
+      <div class="pc-cycle">500 bottle minimum order</div>
+      <div class="pc-div"></div>
+      <ul class="pc-list">
+        <li>250ml / 500ml / 1L / 1.5L</li>
+        <li>Custom label design included</li>
+        <li>Your brand, our quality</li>
+        <li>5–7 day delivery</li>
+        <li>Events, weddings, corporate</li>
+        <li>Bulk discounts available</li>
+      </ul>
+      <button class="pc-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Order Custom Bottles</button>
+    </div>
+    <div class="pc">
+      <div class="pc-icon">🏭</div>
+      <div class="pc-tier">RO Plant Installation</div>
+      <div class="pc-price">Custom</div>
+      <div class="pc-cycle">Site survey + tailored quote</div>
+      <div class="pc-div"></div>
+      <ul class="pc-list">
+        <li>Free site assessment</li>
+        <li>500 LPH to 50,000 LPH capacity</li>
+        <li>Full equipment + installation</li>
+        <li>Annual maintenance contract</li>
+        <li>4-hour emergency response</li>
+        <li>Operator training included</li>
+      </ul>
+      <button class="pc-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Get Free Quote</button>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec sec-cream" id="faq">
+  <div class="faq-wrap">
+    <div class="faq-sticky">
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">FAQ</span></div>
+      <h2 class="sh2">Your Questions,<br><em>Answered.</em></h2>
+      <p class="sp" style="margin-top:14px;">Have more questions? Call us at +92 300 000 0000 or WhatsApp us any time — we respond within the hour.</p>
+    </div>
+    <div class="faq-list">
+      <div class="fq"><div class="fq-q">Is Moonsoon Minerals water safe for drinking and cooking? <i class="fq-ico">+</i></div><div class="fq-body"><div class="fq-body-in">Absolutely. Our water passes through a 7-stage purification process including RO membrane filtration, UV sterilisation, and mineral balancing. It is tested in PSQCA-accredited laboratories and meets all WHO drinking water quality standards. It is completely safe for drinking, cooking, baby formula preparation, and medical use.</div></div></div>
+      <div class="fq"><div class="fq-q">What is the minimum order for custom label water bottles? <i class="fq-ico">+</i></div><div class="fq-body"><div class="fq-body-in">Our minimum order for custom labelled bottles is 500 units. We offer sizes in 250ml, 500ml, 1 litre, and 1.5 litre. The price includes a free label design service. Delivery is 5–7 working days. Larger orders (5,000+) qualify for special rates.</div></div></div>
+      <div class="fq"><div class="fq-q">How much does an RO plant installation cost? <i class="fq-ico">+</i></div><div class="fq-body"><div class="fq-body-in">Every RO plant is custom-designed for your water quality, required output capacity, and site conditions. We offer a completely free site assessment and no-obligation quote. Systems typically range from PKR 150,000 for a small commercial unit to PKR 2,000,000+ for large industrial plants. We also offer flexible payment plans.</div></div></div>
+      <div class="fq"><div class="fq-q">How often is the water tested and can I see the reports? <i class="fq-ico">+</i></div><div class="fq-body"><div class="fq-body-in">Every production batch is tested internally before dispatch. We also conduct monthly independent laboratory tests at a PSQCA-accredited facility. All customers can request the latest lab report at any time. We also display current quality certificates on this website. Transparency is central to everything we do.</div></div></div>
+      <div class="fq"><div class="fq-q">What areas of Karachi do you cover? <i class="fq-ico">+</i></div><div class="fq-body"><div class="fq-body-in">We currently deliver to all major areas of Karachi including DHA, Clifton, PECHS, Gulshan-e-Iqbal, North Nazimabad, Saddar, Malir, Landhi, Korangi and surrounding areas. For RO plant installations, we cover all of Sindh. Contact us to confirm coverage for your specific location.</div></div></div>
+      <div class="fq"><div class="fq-q">Do you offer annual maintenance contracts for RO plants? <i class="fq-ico">+</i></div><div class="fq-body"><div class="fq-body-in">Yes. Our AMC (Annual Maintenance Contract) covers scheduled filter replacements, membrane inspection and cleaning, pump servicing, quarterly water quality testing, and a guaranteed 4-hour emergency call-out response. AMC packages start from PKR 24,000 per year depending on plant size and complexity.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT / ORDER -->
+<section class="sec" id="contact">
+  <div class="contact-grid">
+    <div>
+      <div class="eye"><div class="eye-line"></div><span class="eye-txt">Get In Touch</span></div>
+      <h2 class="sh2">Order Pure Water<br><em>Today.</em></h2>
+      <p class="sp" style="margin-bottom:8px;">Fill in the form and our team will respond within 2 hours with a personalised quote. First consultation and site visit are completely free.</p>
+      <div class="contact-items">
+        <div class="ci"><div class="ci-ico">📍</div><div><div class="ci-lbl">Our Location</div><div class="ci-val">Plot 14, SITE Area, Industrial Zone<br>Karachi, Sindh 75950</div></div></div>
+        <div class="ci"><div class="ci-ico">📞</div><div><div class="ci-lbl">Phone & WhatsApp</div><div class="ci-val">+92 300 000 0000<br>Available 7 days, 8am – 8pm</div></div></div>
+        <div class="ci"><div class="ci-ico">📧</div><div><div class="ci-lbl">Email</div><div class="ci-val">orders@moonsoonminerals.pk<br>info@moonsoonminerals.pk</div></div></div>
+        <div class="ci"><div class="ci-ico">🚚</div><div><div class="ci-lbl">Delivery Coverage</div><div class="ci-val">All major Karachi areas<br>Same-day delivery available</div></div></div>
+      </div>
+    </div>
+    <div class="form-wrap">
+      <div class="fw-title">Place an Order</div>
+      <div class="fw-sub">Tell us what you need and we'll get back to you within 2 hours.</div>
+      <div class="cf-row">
+        <div class="cf-field"><label class="cf-label">Full Name</label><input class="cf-input" type="text" placeholder="Ahmed Khan"/></div>
+        <div class="cf-field"><label class="cf-label">Phone / WhatsApp</label><input class="cf-input" type="tel" placeholder="+92 300 0000000"/></div>
+        <div class="cf-field"><label class="cf-label">Email Address</label><input class="cf-input" type="email" placeholder="ahmed@email.com"/></div>
+        <div class="cf-field"><label class="cf-label">Location / Area</label><input class="cf-input" type="text" placeholder="DHA Phase 5, Karachi"/></div>
+        <div class="cf-field full"><label class="cf-label">Service Required</label>
+          <select class="cf-input cf-select">
+            <option value="">Select a service</option>
+            <option>Daily / Monthly Water Supply (Per Litre)</option>
+            <option>Custom Label Branded Bottles</option>
+            <option>RO Plant Installation (Commercial)</option>
+            <option>RO Plant Installation (Industrial)</option>
+            <option>RO Plant Annual Maintenance Contract</option>
+            <option>All Three Services</option>
+          </select>
+        </div>
+        <div class="cf-field full"><label class="cf-label">Daily / Monthly Volume Required</label>
+          <select class="cf-input cf-select">
+            <option value="">Select approximate volume</option>
+            <option>Under 100 litres / day</option>
+            <option>100 – 500 litres / day</option>
+            <option>500 – 2,000 litres / day</option>
+            <option>2,000 – 10,000 litres / day</option>
+            <option>10,000+ litres / day</option>
+          </select>
+        </div>
+        <div class="cf-field full"><label class="cf-label">Additional Details</label><textarea class="cf-input" rows="4" placeholder="Tell us more about your requirements — type of premises, number of people, special requirements..." style="resize:vertical;"></textarea></div>
+      </div>
+      <button class="cf-submit">Submit Order Request →</button>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-top">
+    <div>
+      <div class="ft-brand-drop">💧</div>
+      <div class="ft-brand-name">Moonsoon <em>Minerals</em></div>
+      <div class="ft-brand-tagline">Premium Drinking Water · Est. 2018</div>
+      <p class="ft-brand-desc">Karachi's trusted provider of RO purified drinking water, custom branded bottles, and complete water plant installation services.</p>
+      <div class="ft-soc">
+        <a class="ft-soc-a">Fb</a><a class="ft-soc-a">Ig</a><a class="ft-soc-a">Wa</a><a class="ft-soc-a">Yt</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Services</div>
+      <div class="ft-col-l">
+        <a href="#">Water Supply</a><a href="#">Custom Label Bottles</a>
+        <a href="#">RO Plant Installation</a><a href="#">Plant Maintenance</a>
+        <a href="#">Lab Testing</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Company</div>
+      <div class="ft-col-l">
+        <a href="#">About Us</a><a href="#">Quality Certifications</a>
+        <a href="#">Our Facility</a><a href="#">Careers</a>
+        <a href="#">Blog</a>
+      </div>
+    </div>
+    <div>
+      <div class="ft-col-h">Contact</div>
+      <div class="ft-col-l">
+        <a href="#">SITE Area, Karachi</a>
+        <a href="#">+92 300 000 0000</a>
+        <a href="#">orders@moonsoonminerals.pk</a>
+        <a href="#">Mon – Sat: 8am – 8pm</a>
+        <a href="#">Emergency: 24/7</a>
+      </div>
+    </div>
+  </div>
+  <div class="ft-cert-band">
+    <div class="ft-cert"><span class="ft-cert-ico">🏆</span> ISO 9001:2015 Certified</div>
+    <div class="ft-cert"><span class="ft-cert-ico">🧪</span> PSQCA Approved</div>
+    <div class="ft-cert"><span class="ft-cert-ico">✅</span> WHO Standards Compliant</div>
+    <div class="ft-cert"><span class="ft-cert-ico">🌊</span> 99.9% Purity Guaranteed</div>
+  </div>
+  <div class="ft-bot">
+    <span>© 2026 Moonsoon Minerals — All rights reserved</span>
+    <span>Premium Drinking Water · Karachi, Pakistan</span>
+  </div>
+</footer>
+<!-- <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#040814" stroke="#D4AF37" stroke-width="2"/>
+  
+  <path d="M50 130V70L80 100L110 70V130" stroke="#D4AF37" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M90 130V70L120 100L150 70V130" stroke="#1E40AF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="mix-blend-mode: screen;"/>
+  
+  <path d="M130 50C130 66.5685 116.569 80 100 80C83.4315 80 70 66.5685 70 50" stroke="#FFFFFF" stroke-width="3" stroke-dasharray="4 2"/>
+  
+  <circle cx="100" cy="45" r="5" fill="#FFFFFF">
+    <animate attributeName="opacity" values="1;0.3;1" dur="3s" repeatCount="indefinite" />
+  </circle>
+</svg> -->
+<script>
+gsap.registerPlugin(ScrollTrigger);
+
+/* ── LOADER ── */
+const ldBar=document.getElementById('ldBar'),ldPct=document.getElementById('ldPct'),ldEl=document.getElementById('loader');
+let p=0;
+const ldI=setInterval(()=>{
+  p=Math.min(p+Math.random()*10+4,100);
+  ldBar.style.width=p+'%';ldPct.textContent=Math.floor(p)+'%';
+  if(p>=100){clearInterval(ldI);setTimeout(()=>{ldEl.style.transition='opacity .7s';ldEl.style.opacity='0';setTimeout(()=>{ldEl.style.display='none';go();},720);},200);}
+},65);
+
+/* ── HEADER ── */
+const hdr=document.getElementById('hdr');
+window.addEventListener('scroll',()=>hdr.classList.toggle('solid',scrollY>55),{passive:true});
+
+/* ── HAMBURGER ── */
+const ham=document.getElementById('ham'),mobD=document.getElementById('mobDrawer'),mobB=document.getElementById('mobBg');
+const open=()=>{ham.classList.add('open');mobD.classList.add('open');mobB.classList.add('open');document.body.style.overflow='hidden';};
+const close=()=>{ham.classList.remove('open');mobD.classList.remove('open');mobB.classList.remove('open');document.body.style.overflow='';};
+ham.addEventListener('click',()=>ham.classList.contains('open')?close():open());
+mobB.addEventListener('click',close);
+document.querySelectorAll('.mob-links a,.mob-cta').forEach(a=>a.addEventListener('click',close));
+
+/* ── FAQ ── */
+document.querySelectorAll('.fq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const o=q.classList.contains('on');
+    document.querySelectorAll('.fq-q').forEach(x=>{x.classList.remove('on');x.nextElementSibling.style.height='0';});
+    if(!o){q.classList.add('on');const b=q.nextElementSibling;b.style.height=b.scrollHeight+'px';}
+  });
+});
+
+/* ── GALLERY AUTO-SCROLL ── */
+const gs=document.getElementById('gstrip');
+let ga=setInterval(()=>{gs.scrollLeft+=1;},22);
+gs.addEventListener('mouseenter',()=>clearInterval(ga));
+gs.addEventListener('mouseleave',()=>{ga=setInterval(()=>{gs.scrollLeft+=1;},22);});
+
+/* ── NAV ACTIVE ── */
+const sects=document.querySelectorAll('section[id],div[id]');
+const navAs=document.querySelectorAll('.nav-d a');
+window.addEventListener('scroll',()=>{
+  let c='';
+  sects.forEach(s=>{if(scrollY>=s.offsetTop-140)c=s.id;});
+  navAs.forEach(a=>{a.style.color=a.getAttribute('href')==='#'+c?'var(--gold)':'';});
+},{passive:true});
+
+/* ── ANIMATIONS ── */
+function go(){
+  /* Hero entrance */
+  gsap.timeline({defaults:{ease:'expo.out'}})
+    .from('.hero-sup',{opacity:0,y:16,duration:.7,delay:.1})
+    .from('.hero-h1',{opacity:0,y:50,duration:1},'-=.3')
+    .from('.hero-p',{opacity:0,y:22,duration:.8},'-=.5')
+    .from('.hero-btns',{opacity:0,y:16,duration:.6},'-=.4')
+    .from('.hero-trust',{opacity:0,y:12,duration:.5},'-=.3')
+    .from('.hst',{opacity:0,y:14,stagger:.1,duration:.5},'-=.3')
+    .from('.hero-bottle-frame',{opacity:0,x:40,duration:.9},'-=.9')
+    .from('.hbc',{opacity:0,scale:.85,stagger:.15,duration:.6},'-=.5');
+
+  /* Generic reveals */
+  const revSels=['.why-intro','.srv-intro','.about-grid','.proc-intro','.quality-grid','.testi-intro','.pricing-hdr','.faq-sticky','.contact-grid > div'];
+  revSels.forEach(sel=>{
+    gsap.utils.toArray(sel).forEach(el=>{
+      gsap.fromTo(el,{opacity:0,y:30},{opacity:1,y:0,duration:.85,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%',toggleActions:'play none none none'}});
+    });
+  });
+
+  /* Stagger groups */
+  ['.wcard','.svc-card','.pstep','.xcard','.pc','.apt','.qspec','.fq'].forEach(sel=>{
+    gsap.utils.toArray(sel).forEach((el,i)=>{
+      gsap.fromTo(el,{opacity:0,y:24},{opacity:1,y:0,duration:.7,delay:i*.09,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 91%',toggleActions:'play none none none'}});
+    });
+  });
+
+  /* Stats */
+  gsap.utils.toArray('.sstat').forEach((el,i)=>{
+    gsap.fromTo(el,{opacity:0,y:20},{opacity:1,y:0,duration:.6,delay:i*.12,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  /* Gold border */
+  gsap.from('.about-gold-border',{scale:.8,opacity:0,duration:.9,ease:'power3.out',scrollTrigger:{trigger:'.about-grid',start:'top 80%'}});
+
+  /* Process line */
+  gsap.from('.proc-flow::before',{scaleX:0,transformOrigin:'left',duration:1.2,ease:'power3.out',scrollTrigger:{trigger:'.proc-flow',start:'top 78%'}});
+}
+</script>
+</body>
+</html>
